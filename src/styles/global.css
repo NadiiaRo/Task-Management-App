@@ -16,7 +16,8 @@ a {
 }
 
 button {
-    background-color: #3498db;
+    /*background-color: #3498db;*/
+    background-color: #535FFD;
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -25,17 +26,32 @@ button {
 }
 
 button:hover {
-    background-color: #2980b9;
+    /*background-color: #2980b9;*/
+    background-color: #3a39f2;
 }
 
 input {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 ul {
     list-style: none;
     padding: 0;
+}
+
+@media (max-width: 768px) {
+    body{
+        font-size: ;
+    }
+
+    .taskList{
+        padding: 0.5rem;
+    }
+
+    .loginPage{
+        padding: 1rem;
+    }
 }

@@ -1,44 +1,8 @@
-// import React, { useState } from 'react';
-//
-// const LoginPage: React.FC = () => {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//
-//     const handleLogin = () => {
-//         if (email === 'test@test.com' && password === 'password') {
-//             localStorage.setItem('user', JSON.stringify({ email }));
-//             window.location.href = '/dashboard';
-//         } else {
-//             alert('Invalid credentials');
-//         }
-//     };
-//
-//     return (
-//         <div>
-//             <h1>Login</h1>
-//             <input
-//                 type="email"
-//                 placeholder="Email"
-//                 value={email}
-//                 onChange={(e) => setEmail(e.target.value)}
-//             />
-//             <input
-//                 type="password"
-//                 placeholder="Password"
-//                 value={password}
-//                 onChange={(e) => setPassword(e.target.value)}
-//             />
-//             <button onClick={handleLogin}>Login</button>
-//         </div>
-//     );
-// };
-//
-// export default LoginPage;
-
 import React, { useState } from 'react';
-import styles from './LoginPage.module.css';
+import styles from '../styles/LoginPage.module.css';
 
 const LoginPage: React.FC = () => {
+    // Use react useRef or React forms to fix the inputs
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');

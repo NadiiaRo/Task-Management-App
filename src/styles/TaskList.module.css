@@ -1,26 +1,29 @@
-.taskList {
-    max-width: 600px;
-    margin: 2rem auto;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.taskItem {
+.tasks {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.task {
+    display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #ddd;
+    align-items: center;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
 }
 
-.taskItem:last-child {
-    border-bottom: none;
+.taskContent {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
 }
 
-.taskTitle {
-    font-size: 1rem;
+.task span {
+    flex-grow: 1;
+    cursor: pointer;
 }
 
 .completed {
@@ -28,13 +31,8 @@
     color: #999;
 }
 
-.deleteButton {
-    background-color: #e74c3c;
-    color: white;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-}
-
-.deleteButton:hover {
-    background-color: #c0392b;
+.editTask {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
