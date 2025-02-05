@@ -1,20 +1,27 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import styles from '../styles/UserMenu.module.css';
+import ThemeToggle from "./ThemeToggle";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser} from '@fortawesome/free-solid-svg-icons';
 
 const UserMenu: React.FC = () => {
     const navigate = useNavigate();
 
-    const handleLogout =  () => {
+    const handleLogout = () => {
         localStorage.removeItem('user');
         navigate('/');
     };
 
     return (
-       <div className={styles.userMenu}>
-           <span>👤</span>
-           <button onClick={handleLogout} className={styles.logoutButton}>Logout</button>
-       </div>
+        <div className={styles.userMenu}>
+            <div>
+                <ThemeToggle/></div>
+            <div className={styles.user}>
+                <span><FontAwesomeIcon icon={faUser}/></span>
+                <button onClick={handleLogout} className={styles.logoutButton}>Logout</button>
+            </div>
+        </div>
     );
 }
 

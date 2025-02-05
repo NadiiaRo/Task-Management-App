@@ -1,39 +1,8 @@
 .dashboard {
     max-width: 800px;
     margin: 2rem auto;
-    background: white;
+    background: #f4f4f4;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.addTask {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    align-items: center;
-}
-
-input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    flex-grow: 1;
-}
-
-button {
-    width: fit-content;
-    height: fit-content;
-    /*background-color: #3498db;*/
-    background-color: #535FFD;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    /*background-color: #2980b9;*/
-    background-color: #3a39f2;
 }

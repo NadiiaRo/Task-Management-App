@@ -26,13 +26,11 @@ input {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-top: 0.5rem;
 }
 
 button {
     width: 100%;
     padding: 0.7rem;
-    /*background-color: #3498db;*/
     background-color: #535FFD;
     color: white;
     border: none;
@@ -42,7 +40,6 @@ button {
 }
 
 button:hover {
-    /*background-color: #2980b9;*/
     background-color: #3a39f2;
 }
 

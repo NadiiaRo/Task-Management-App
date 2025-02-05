@@ -1,0 +1,54 @@
+.addTask {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    margin-bottom: 0.1rem;
+    align-items: center;
+}
+
+input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex-grow: 1;
+    transition: border 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+button {
+    width: fit-content;
+    height: fit-content;
+    background-color: #535FFD;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3a39f2;
+}
+
+.addTaskButton {
+    margin: 0.5rem 0;
+}
+
+.priorityDropdown {
+    padding: 0.5rem;
+    border-radius: 20px;
+}
+
+.errorMessage {
+    color: red;
+}
+
+.errorInput {
+    outline: 1px solid red;
+    transition: border 0.3s ease-in-out;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
