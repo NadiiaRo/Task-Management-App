@@ -1,0 +1,17 @@
+.themeToggleBtn {
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.light {
+    background: black;
+    color: white;
+}
+
+.dark {
+    background: white;
+    color: black;
+}

@@ -1,6 +1,8 @@
 import React, {useContext, useState} from 'react';
 import {TaskContext} from '../context/TaskContext';
 import styles from '../styles/TaskList.module.css';
+import {faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const TaskList: React.FC = () => {
     const taskContext = useContext(TaskContext);
@@ -10,7 +12,6 @@ const TaskList: React.FC = () => {
     const {tasks, editTask, toggleTask, deleteTask, filteredTasks} = taskContext;
     const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
     const [editedTitle, setEditedTitle] = useState('');
-    const [priority, setPriority] = useState('normal'); //Refactoring Add Task functionality
     const [editedPriority, setEditedPriority] = useState<string>('');
 
 
@@ -32,7 +33,7 @@ const TaskList: React.FC = () => {
         }
     };
 
-    const displayedTasks = filteredTasks.length > 0 ? filteredTasks : tasks;
+    const displayedTasks = filteredTasks.length > 0 ? filteredTasks : [];
 
     const getPrioritySymbol = (priority: string) => {
         switch (priority) {
@@ -49,7 +50,7 @@ const TaskList: React.FC = () => {
     return (
         <div className={styles.tasks}>
             {displayedTasks.length === 0 ? (
-                <div>
+                <div className={styles.noTasks}>
                     <p>No tasks found.</p>
                 </div>
             ) : (
@@ -77,18 +78,23 @@ const TaskList: React.FC = () => {
                             </div>
                         ) : (
                             <div className={styles.taskContent}>
+                                <input
+                                    type="checkbox"
+                                    checked={task.completed}
+                                    onChange={() => toggleTask(task.id)}
+                                />
                                 <span
                                     className={task.completed ? styles.completed : ''}
-                                    onClick={() => toggleTask(task.id)}
-                                >
+                                    onClick={() => toggleTask(task.id)}>
                                     {task.title}
                                 </span>
                                 <div className={styles.updateTask}>
                                     {getPrioritySymbol(task.priority)}
-                                    <button onClick={() => handleEditTask(task.id)}>Edit</button>
-                                    <button onClick={() => deleteTask(task.id)}>Delete</button>
                                 </div>
-
+                                <div className={styles.updateTask}>
+                                    <button className={styles.editBtn} onClick={() => handleEditTask(task.id)}><FontAwesomeIcon icon={faPenToSquare} /></button>
+                                    <button className={styles.deleteBtn} onClick={() => deleteTask(task.id)}><FontAwesomeIcon icon={faTrash} /></button>
+                                </div>
                             </div>
                         )}
                     </div>

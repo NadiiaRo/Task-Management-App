@@ -1,10 +1,9 @@
 .userMenu {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     gap: 1rem;
     padding: 10px;
-    background-color: #f4f4f4;
 }
 
 .userIcon {
@@ -16,4 +15,19 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.logoutButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: #1a1a1a;
+}
+
+.logoutButton:hover {
+    background-color: transparent;
+    color: #1a1a1a;
 }

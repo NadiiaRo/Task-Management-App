@@ -31,8 +31,14 @@ const AddTask: React.FC = () => {
             setErrorMessage('Empty field.')
             setIsInputError(true); // <-- Sets input field to red
             setTimeout(() => {
-                setIsInputError(false); // <-- Resets the input field color after 1 second
-            }, 1000);
+                setIsInputError(false); // <-- Resets the input field color after 3 seconds
+            }, 3000);
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            handleAddTask();
         }
     };
 
@@ -45,16 +51,22 @@ const AddTask: React.FC = () => {
             ) : (
                 <>
                     <div className={styles.addTask}>
-                        <input
-                            type="text"
-                            placeholder="New Task"
-                            ref={taskInputRef}
-                            className={isInputError ? styles.errorInput : ''} // Apply error style conditionally
-                            onChange={() => {
-                                setErrorMessage(null); // Clear error message when user types
-                                setIsInputError(false); // Reset input error styling
-                            }}
-                        />
+                        <div className={styles.inputWrapper}>
+                            <input
+                                type="text"
+                                placeholder="New Task"
+                                ref={taskInputRef}
+                                className={isInputError ? styles.errorInput : ''}
+                                onChange={() => {
+                                    setErrorMessage(null);
+                                    setIsInputError(false);
+                                }}
+                                onKeyDown={handleKeyDown}
+                            />
+                            {errorMessage && (
+                                <div className={styles.errorMessage}>{errorMessage}</div>
+                            )}
+                        </div>
                         <select className={styles.priorityDropdown}
                                 value={priority}
                                 onChange={(e) => setPriority(e.target.value)}
@@ -65,9 +77,6 @@ const AddTask: React.FC = () => {
                         </select>
                         <button onClick={handleAddTask}>Add Task</button>
                     </div>
-                    {errorMessage && (
-                        <div className={styles.errorMessage}>{errorMessage}</div>
-                    )}
                 </>
             )}
         </>

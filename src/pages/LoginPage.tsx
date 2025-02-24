@@ -1,25 +1,41 @@
-import React, { useState } from 'react';
+import React, {useRef, useState} from 'react';
+import {Link, useNavigate} from "react-router-dom";
+import {auth} from "../firebaseConfig";
+import {signInWithEmailAndPassword} from "firebase/auth"
 import styles from '../styles/LoginPage.module.css';
 
 const LoginPage: React.FC = () => {
-    // Use react useRef or React forms to fix the inputs
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
+    const [isInputError, setIsInputError] = useState(false);
 
-    const handleLogin = () => {
-        const correctEmail = 'test@test.com';
-        const correctPassword = 'password';
+    const handleLogin = async () => {
+        // const correctEmail = 'test@test.com';
+        // const correctPassword = 'password';
+        const enteredEmail = emailRef.current?.value.trim() || "";
+        const enteredPassword = passwordRef.current?.value || "";
 
-        if (email === correctEmail && password === correctPassword) {
-            localStorage.setItem('user', JSON.stringify({ email }));
-            window.location.href = '/dashboard';
-        } else {
-            setErrorMessage(
-                `Invalid credentials. Please use the following to log in:
-                Email: ${correctEmail}
-                Password: ${correctPassword}`
-            );
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword);
+            console.log("User logged in:", userCredential.user);
+            navigate('/dashboard');
+        } catch (error: any) {
+            console.log("Login error:", error);
+            if (error.code === "auth/invalid-credential") {
+                setErrorMessage("Incorrect email or password. Please try again.");
+            } else {
+                setErrorMessage("User not found. Please sign up.");
+            }
+            setIsInputError(true); // <-- Sets input field to red
+            setTimeout(() => setIsInputError(false), 3000); // <-- Resets the input field color after 3 seconds
+        }
+    };
+
+    const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            await handleLogin();
         }
     };
 
@@ -32,8 +48,12 @@ const LoginPage: React.FC = () => {
                     <input
                         type="email"
                         placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        ref={emailRef}
+                        onKeyDown={handleKeyDown}
+                        className={isInputError ? styles.errorInput : ''}
+                        onChange={() => {
+                            setIsInputError(false);
+                        }}
                     />
                 </div>
                 <div className={styles.formGroup}>
@@ -41,14 +61,19 @@ const LoginPage: React.FC = () => {
                     <input
                         type="password"
                         placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        ref={passwordRef}
+                        onKeyDown={handleKeyDown}
+                        className={isInputError ? styles.errorInput : ''}
+                        onChange={() => {
+                            setIsInputError(false);
+                        }}
                     />
                 </div>
-                <button onClick={handleLogin}>Login</button>
+                <button className={styles.loginBtn} onClick={handleLogin}>Login</button>
                 {errorMessage && (
                     <div className={styles.errorMessage}>{errorMessage}</div>
                 )}
+                <span>Don't have an account? <Link to="/signup">Signup</Link></span>
             </div>
         </div>
     );

@@ -48,3 +48,44 @@ export default tseslint.config({
   },
 })
 ```
+
+TODO 
+
+Login: 
+
+Create sign up button 
+Create a validation for email input ( I mean validation for @) 
+Launch Firebase 
+
+Tasks: 
+
+Create in Firebase tasks base for each user 
+
+interface User = {
+    id: number,
+    name: string,
+    email: string,
+    password: string,
+    tasks: Task[]
+}
+
+or type 
+
+interface Task = {
+    taskId: number,
+    description: string,
+    priority: string, 
+    isCompleted: boolean,
+}
+
+Design
+
+inputs border radius 
+search input placement
+add task placement 
+done task design ( show ab it more diff with undone task)
+
+Filters 
+
+priority filter 
+done/undone filter

@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import {ThemeContext} from "../context/ThemeContext";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
+import styles from "../styles/ThemeToggle.module.css";
 
 const ThemeToggle: React.FC = () => {
     const themeContext = useContext(ThemeContext);
@@ -10,7 +11,7 @@ const ThemeToggle: React.FC = () => {
     const {theme, toggleTheme} = themeContext;
 
     return (
-        <button onClick={toggleTheme}>
+        <button onClick={toggleTheme} className={`${styles.themeToggleBtn} ${theme === "light" ? styles.light : styles.dark}`}>
             {theme === "light" ? (
                 <>
                     <FontAwesomeIcon icon={faMoon}/> Dark Mode
