@@ -8,19 +8,19 @@ const SearchBar: React.FC = () => {
     const taskContext = useContext(TaskContext);
     if (!taskContext) return null;
 
-    const {tasks, setFilteredTasks} = taskContext; // Make sure TaskContext has setFilteredTasks
+    const {tasks, setSortedTasks} = taskContext; // Make sure TaskContext has setSortedTasks
     const searchInputRef = useRef<HTMLInputElement>(null);
 
     const handleSearch = () => {
         const query = searchInputRef.current?.value.trim().toLowerCase();
-        if (!query) return setFilteredTasks(tasks);
+        if (!query) return setSortedTasks(tasks);
 
-        const filteredTasks = tasks.filter((task) => {
+        const sortedTasks = tasks.filter((task) => {
             return task.title.toLowerCase().includes(query);
         });
 
-        console.log("Filtered tasks:", filteredTasks); // Check filtered result
-        setFilteredTasks(filteredTasks);
+        console.log("Sorted tasks:", sortedTasks); // Check filtered result
+        setSortedTasks(sortedTasks);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

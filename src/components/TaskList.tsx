@@ -1,19 +1,20 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {TaskContext} from '../context/TaskContext';
 import styles from '../styles/TaskList.module.css';
 import {faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {auth} from "../firebaseConfig";
 
 const TaskList: React.FC = () => {
     const taskContext = useContext(TaskContext);
 
     if (!taskContext) return null;
 
-    const {tasks, editTask, toggleTask, deleteTask, filteredTasks} = taskContext;
+    const {tasks, setTasks, editTask, toggleTask, deleteTask, sortedTasks, fetchTasks} = taskContext;
     const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
     const [editedTitle, setEditedTitle] = useState('');
     const [editedPriority, setEditedPriority] = useState<string>('');
-
+    const user = auth.currentUser;
 
     const handleEditTask = (id: string) => {
         setEditingTaskId(id);
@@ -33,7 +34,7 @@ const TaskList: React.FC = () => {
         }
     };
 
-    const displayedTasks = filteredTasks.length > 0 ? filteredTasks : [];
+    const displayedTasks = sortedTasks.length > 0 ? sortedTasks : [];
 
     const getPrioritySymbol = (priority: string) => {
         switch (priority) {
@@ -46,6 +47,12 @@ const TaskList: React.FC = () => {
                 return '🔵';
         }
     };
+
+    useEffect(() => {
+        if (user) {
+            fetchTasks(user.uid);
+        }
+    }, []);
 
     return (
         <div className={styles.tasks}>
@@ -80,11 +87,11 @@ const TaskList: React.FC = () => {
                             <div className={styles.taskContent}>
                                 <input
                                     type="checkbox"
-                                    checked={task.completed}
+                                    checked={task.isCompleted}
                                     onChange={() => toggleTask(task.id)}
                                 />
                                 <span
-                                    className={task.completed ? styles.completed : ''}
+                                    className={task.isCompleted ? styles.completed : ''}
                                     onClick={() => toggleTask(task.id)}>
                                     {task.title}
                                 </span>

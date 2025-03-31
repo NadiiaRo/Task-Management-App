@@ -1,13 +1,16 @@
 import React, {useRef, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {auth} from '../firebaseConfig';
-import {createUserWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import styles from '../styles/LoginPage.module.css';
 
 const SignupPage: React.FC = () => {
     // const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const firstNameRef = useRef<HTMLInputElement>(null);
+    const lastNameRef = useRef<HTMLInputElement>(null);
+
     const navigate = useNavigate(); // Use navigate instead of window.location.href
     const [errorMessage, setErrorMessage] = useState('');
     const [isInputError, setIsInputError] = useState(false);
@@ -16,12 +19,18 @@ const SignupPage: React.FC = () => {
         // const enteredName = nameRef.current?.value.trim() || "";
         const enteredEmail = emailRef.current?.value.trim() || "";
         const enteredPassword = passwordRef.current?.value || "";
+        const firstName = firstNameRef.current?.value.trim() || "";
+        const lastName = lastNameRef.current?.value.trim() || "";
 
         try {
             // Create user in Firebase Authentication
             const userCredential = await createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword);
             const user = userCredential.user;
             console.log("User created:", user, userCredential);
+
+            await updateProfile(user, {
+                displayName: `${firstName} ${lastName}`
+            });
 
             // Redirect to login page
             navigate('/');
@@ -46,29 +55,38 @@ const SignupPage: React.FC = () => {
         <div className={styles.loginPage}>
             <div className={styles.loginForm}>
                 <h1>Signup</h1>
-                <div className={styles.formGroup}>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                        ref={emailRef}
-                        onKeyDown={handleKeyDown}
-                        className={isInputError ? styles.errorInput : ''}
-                        onChange={() => setIsInputError(false)}
-                    />
+                <div className={styles.loginInputs}>
+                    <div className={styles.formGroup}>
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            ref={emailRef}
+                            onKeyDown={handleKeyDown}
+                            className={isInputError ? styles.errorInput : ''}
+                            onChange={() => {
+                                setIsInputError(false);
+                            }}
+                        />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            placeholder="Create your password"
+                            ref={passwordRef}
+                            onKeyDown={handleKeyDown}
+                            className={isInputError ? styles.errorInput : ''}
+                            onChange={() => {
+                                setIsInputError(false);
+                            }}
+                        />
+                    </div>
+                    <button className={styles.loginBtn} onClick={handleSignup}>Login</button>
                 </div>
-                <div className={styles.formGroup}>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        placeholder="Create your password"
-                        ref={passwordRef}
-                        onKeyDown={handleKeyDown}
-                        className={isInputError ? styles.errorInput : ''}
-                        onChange={() => setIsInputError(false)}
-                    />
-                </div>
-                <button className={styles.loginBtn} onClick={handleSignup}>Signup</button>
+                {errorMessage && (
+                    <div className={styles.errorMessage}>{errorMessage}</div>
+                )}
                 <span>Already have an account? <Link to="/">Login</Link></span>
             </div>
         </div>

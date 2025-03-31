@@ -2,10 +2,11 @@ import UserMenu from '../components/UserMenu';
 import SearchBar from "../components/SearchBar";
 import AddTask from "../components/AddTask";
 import TaskList from '../components/TaskList';
-import Filter from "../components/Filter";
+import Sort from "../components/Sort";
 import styles from '../styles/Dashboard.module.css';
 
 const Dashboard: React.FC = () => {
+
     return (
         <>
             <UserMenu/>
@@ -17,7 +18,7 @@ const Dashboard: React.FC = () => {
 
                 <div className={styles.actions}>
                     <AddTask/>
-                    <Filter/>
+                    <Sort/>
                 </div>
                 <TaskList/>
             </div>

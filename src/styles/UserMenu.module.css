@@ -1,20 +1,24 @@
-.userMenu {
+.header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 1rem;
     padding: 10px;
 }
 
-.userIcon {
-    font-size: 24px;
-    margin-right: 10px;
-}
-
-.user {
+.userMenu {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.userId {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.userIcon {
+    padding: 0.5rem;
 }
 
 .logoutButton {
@@ -22,6 +26,7 @@
     flex-direction: row;
     align-items: center;
     width: fit-content;
+    padding: 0.5rem;
     gap: 0.5rem;
     background-color: transparent;
     color: #1a1a1a;

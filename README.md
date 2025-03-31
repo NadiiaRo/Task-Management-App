@@ -53,9 +53,11 @@ TODO
 
 Login: 
 
-Create sign up button 
-Create a validation for email input ( I mean validation for @) 
-Launch Firebase 
+[//]: # (Create sign up button )
+
+[//]: # (Create a validation for email input &#40; I mean validation for @&#41; )
+
+[//]: # (Launch Firebase )
 
 Tasks: 
 
@@ -89,3 +91,15 @@ Filters
 
 priority filter 
 done/undone filter
+
+
+FIRESTORE RULES:
+rules_version = '2';
+
+service cloud.firestore {
+match /databases/{database}/documents {
+match /{document=**} {
+allow read, write: if false;
+}
+}
+}

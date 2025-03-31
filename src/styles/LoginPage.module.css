@@ -1,10 +1,14 @@
-.loginPage {
+.loginPage, .loginForm {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+}
+
+.loginPage {
+    justify-content: center;
     height: 100vh; /* Full viewport height to center vertically */
     background-color: #f4f4f4;
+    position: relative;
 }
 
 .loginForm {
@@ -14,16 +18,21 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px; /* Limit the width of the form */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 1rem;
+}
+
+.loginForm h1 {
+    margin: 1rem 0;
+}
+
+.loginInputs {
+    width: 100%;
 }
 
 .formGroup {
-    margin: 0.5rem 0;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    margin: 0.5rem 0;
 }
 
 input {
@@ -33,7 +42,6 @@ input {
 }
 
 .loginBtn {
-    /*margin: 0.5rem 0;*/
     width: 100%;
 }
 
@@ -49,6 +57,9 @@ input {
 }
 
 .errorInput {
-    outline: 2px solid red;
+    outline: 1px solid red;
     transition: border 0.3s ease-in-out;
 }
+
+
+
